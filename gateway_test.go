@@ -7,7 +7,7 @@ import (
 )
 
 func TestDarwin(t *testing.T) {
-	route := exec.Command("sh", "-c", "cat ./darwin.txt | grep gateway | awk '{print $2}'")
+	route := exec.Command("sh", "-c", "cat ./terminal/darwin.txt | grep gateway | awk '{print $2}'")
 	b, err := route.CombinedOutput()
 	if err != nil {
 		t.Fatal(err)
@@ -22,7 +22,7 @@ func TestDarwin(t *testing.T) {
 }
 
 func TestFreeBSD(t *testing.T) {
-	route := exec.Command("sh", "-c", "cat ./freebsd.txt| grep default | awk '{print $2}'")
+	route := exec.Command("sh", "-c", "cat ./terminal/freebsd.txt| grep default | awk '{print $2}'")
 	b, err := route.CombinedOutput()
 	if err != nil {
 		t.Fatal(err)
@@ -37,7 +37,7 @@ func TestFreeBSD(t *testing.T) {
 }
 
 func TestLinux(t *testing.T) {
-	route := exec.Command("sh", "-c", "cat ./linux.txt | awk '{print $3}'")
+	route := exec.Command("sh", "-c", "cat ./terminal/linux.txt | awk '{print $3}'")
 	b, err := route.CombinedOutput()
 	if err != nil {
 		t.Fatal(err)
@@ -53,7 +53,7 @@ func TestLinux(t *testing.T) {
 
 func TestWindows(t *testing.T) {
 	// findstr -> grep
-	route := exec.Command("sh", "-c", "cat ./windows.txt | grep 0.0.0.0")
+	route := exec.Command("sh", "-c", "cat ./terminal/windows.txt | grep 0.0.0.0")
 	b, err := route.CombinedOutput()
 	if err != nil {
 		t.Fatal(err)
