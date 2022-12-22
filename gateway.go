@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net"
 	"os/exec"
+	"runtime"
 )
 
 func Default(os string) (net.IP, error) {
@@ -18,6 +19,10 @@ func Default(os string) (net.IP, error) {
 		return windowsGatewayDiscover()
 	}
 	return nil, errors.New("not supported OS: " + os)
+}
+
+func DefaultWithGOOS() (net.IP, error) {
+	return Default(runtime.GOOS)
 }
 
 func darwinGatewayDiscover() (net.IP, error) {
