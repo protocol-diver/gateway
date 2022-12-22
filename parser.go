@@ -41,7 +41,7 @@ func linuxParser(b []byte) (net.IP, error) {
 	}
 
 	if gstr == "" {
-		return nil, errors.New("")
+		return nil, errors.New("not exist gateway")
 	}
 
 	gstr = "0x" + gstr
