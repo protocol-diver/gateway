@@ -7,6 +7,11 @@ import (
 	"runtime"
 )
 
+func DefaultWithGOOS() (net.IP, error) {
+	return Default(runtime.GOOS)
+}
+
+// I'm not sure if it actually needs to be exported.
 func Default(os string) (net.IP, error) {
 	switch os {
 	case "darwin":
@@ -19,10 +24,6 @@ func Default(os string) (net.IP, error) {
 		return windowsGatewayDiscover()
 	}
 	return nil, errors.New("not supported OS: " + os)
-}
-
-func DefaultWithGOOS() (net.IP, error) {
-	return Default(runtime.GOOS)
 }
 
 func darwinGatewayDiscover() (net.IP, error) {
