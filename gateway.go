@@ -17,7 +17,7 @@ func Default(os string) (net.IP, error) {
 	case "windows":
 		return windowsGatewayDiscover()
 	}
-	return nil, errors.New("noop")
+	return nil, errors.New("not supported OS: " + os)
 }
 
 func darwinGatewayDiscover() (net.IP, error) {

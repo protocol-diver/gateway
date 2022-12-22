@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+func TestDefault(t *testing.T) {
+	if _, err := Default("some"); err == nil {
+		t.Fatal("not supported OS but returns success")
+	}
+}
+
 func TestDarwin(t *testing.T) {
 	route := exec.Command("sh", "-c", "cat ./terminal/darwin.txt | grep gateway | awk '{print $2}'")
 	b, err := route.CombinedOutput()
