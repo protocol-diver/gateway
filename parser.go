@@ -11,6 +11,7 @@ import (
 )
 
 func darwinParser(b []byte) (net.IP, error) {
+	// '192.168.1.1\n'
 	addr, err := netip.ParseAddr(string(b[:len(b)-1]))
 	if err != nil {
 		return nil, err
@@ -20,15 +21,12 @@ func darwinParser(b []byte) (net.IP, error) {
 }
 
 func freebsdParser(b []byte) (net.IP, error) {
-	addr, err := netip.ParseAddr(string(b[:len(b)-1]))
-	if err != nil {
-		return nil, err
-	}
-
-	return addr.AsSlice(), nil
+	// '192.168.1.1\n'
+	return darwinParser(b)
 }
 
 func linuxParser(b []byte) (net.IP, error) {
+	// 'Gateway\nC900A8C0\n00000000\n'
 	arr := bytes.Split(b, []byte("\n"))
 
 	var gstr string
@@ -58,6 +56,7 @@ func linuxParser(b []byte) (net.IP, error) {
 }
 
 func windowsParser(b []byte) (net.IP, error) {
+	// '                        0.0.0.0          0.0.0.0      192.168.1.1    192.168.1.100     20'
 	s := string(b)
 
 	var rawAddr string
